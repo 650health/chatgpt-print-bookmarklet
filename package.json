@@ -1,0 +1,28 @@
+{
+  "name": "chatgpt-print-bookmarklet",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "A bookmarklet to add printer friendly styles to ChatGPT",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/650health/chatgpt-print-bookmarklet.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/650health/chatgpt-print-bookmarklet/issues"
+  },
+  "homepage": "https://github.com/650health/chatgpt-print-bookmarklet#readme",
+  "dependencies": {
+    "get-stdin": "^9.0.0",
+    "mustache": "^4.2.0",
+    "uglify-js": "^3.17.4"
+  }
+}
