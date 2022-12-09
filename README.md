@@ -4,7 +4,7 @@
 
 Create a new bookmark with the following URL:
 ```
-javascript:(function()%7Bdocument.querySelectorAll(%22html%20*.overflow-hidden%22).forEach(function(node)%7Bnode.classList.remove(%22overflow-hidden%22)%3Bnode.classList.add(%22overflow-hidden-off%22)%7D)%3Bdocument.querySelectorAll(%22html%20*.absolute%22).forEach(function(node)%7Bnode.classList.remove(%22absolute%22)%3Bnode.classList.add(%22absolute-off%22)%7D)%3Bdocument.querySelectorAll(%22html%20*.overflow-hidden-off%22).forEach(function(node)%7Bnode.classList.remove(%22overflow-hidden-off%22)%3Bnode.classList.add(%22overflow-hidden%22)%7D)%3Bdocument.querySelectorAll(%22html%20*.absolute-off%22).forEach(function(node)%7Bnode.classList.remove(%22absolute-off%22)%3Bnode.classList.add(%22absolute%22)%7D)%7D)()%3B%0A
+javascript:(function()%7Bif(window.PRINTER_FRIENDLY)%7Bdocument.querySelectorAll(%22html%20*.overflow-hidden-off%22).forEach(function(node)%7Bnode.classList.remove(%22overflow-hidden-off%22)%3Bnode.classList.add(%22overflow-hidden%22)%7D)%3Bdocument.querySelectorAll(%22html%20*.absolute-off%22).forEach(function(node)%7Bnode.classList.remove(%22absolute-off%22)%3Bnode.classList.add(%22absolute%22)%7D)%3Bwindow.PRINTER_FRIENDLY%3Dnull%7Delse%7Bdocument.querySelectorAll(%22html%20*.overflow-hidden%22).forEach(function(node)%7Bnode.classList.remove(%22overflow-hidden%22)%3Bnode.classList.add(%22overflow-hidden-off%22)%7D)%3Bdocument.querySelectorAll(%22html%20*.absolute%22).forEach(function(node)%7Bnode.classList.remove(%22absolute%22)%3Bnode.classList.add(%22absolute-off%22)%7D)%3Bwindow.PRINTER_FRIENDLY%3Dtrue%7D%7D)()%3B%0A
 ```
 
 ## Development Setup
