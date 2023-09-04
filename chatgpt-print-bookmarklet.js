@@ -1,5 +1,6 @@
 (function () {
     if (window.PRINTER_FRIENDLY) {
+      document.querySelector('div[role=presentation]').classList.add('flex');
       document.querySelectorAll('html *.overflow-hidden-off').forEach(function(node) {
           node.classList.remove('overflow-hidden-off');
           node.classList.add('overflow-hidden');
@@ -32,6 +33,7 @@
       document.querySelectorAll('html .self-end button').forEach(function(node) {
           node.parentElement.classList.add('hidden');
       });
+      document.querySelector('div[role=presentation]').classList.remove('flex');
       window.PRINTER_FRIENDLY = true;
     }
 })();
