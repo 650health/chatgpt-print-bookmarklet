@@ -1,5 +1,5 @@
 (function () {
-    if (window.PRINTER_FRIENDLY) {
+    if (window.PF) {
       document.querySelector('div[role=presentation]').classList.add('flex');
       document.querySelectorAll('html *.overflow-hidden-off').forEach(function(node) {
           node.classList.remove('overflow-hidden-off');
@@ -13,7 +13,8 @@
           node.classList.remove('absolute-off');
           node.classList.add('absolute');
       });
-      window.PRINTER_FRIENDLY = null;
+      document.getElementById("pf-styles").remove();
+      window.PF = null;
     } else {
       document.querySelectorAll('html *.overflow-hidden').forEach(function(node) {
           node.classList.remove('overflow-hidden');
@@ -28,6 +29,11 @@
           node.classList.add('absolute-off');
       });
       document.querySelector('div[role=presentation]').classList.remove('flex');
-      window.PRINTER_FRIENDLY = true;
+      let styleElement = document.createElement("style");
+      styleElement.id = "pf-styles";
+      document.head.appendChild(styleElement);
+      styleElement.sheet.insertRule("article > div {padding: 0px !important;}", 0);
+      styleElement.sheet.insertRule("* { font-size: 12px; line-height: 1.3; margin: 0px !important;}", 0);
+      window.PF = true;
     }
 })();
