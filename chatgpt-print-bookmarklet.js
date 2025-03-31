@@ -46,7 +46,7 @@
       styleElement.sheet.insertRule("* { font-size: 12px; line-height: 1.3; margin: 0px !important;}", 0);
       let e = document.getElementsByClassName('sm:p-8');
       if (e.length > 0) {
-          e[0].setAttribute("style", "border: none !important; padding: 0px !important;");
+          e[0].setAttribute("style", "border: none !important; padding: 0px !important; box-shadow: none !important;");
       }
       window.PF = true;
     }
