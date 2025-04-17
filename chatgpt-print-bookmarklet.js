@@ -16,6 +16,9 @@
       document.querySelectorAll('html *.isolate').forEach(function(node) {
           node.style.display = 'flex';
       });
+      document.querySelectorAll('html *.fixed').forEach(function(node) {
+          node.style.display = null;
+      });
       document.getElementById("pf-styles").remove();
       let e = document.getElementsByClassName('sm:p-8');
       if (e.length > 0) {
@@ -38,11 +41,16 @@
       document.querySelectorAll('html *.isolate').forEach(function(node) {
           node.style.display = 'none';
       });
+      document.querySelectorAll('html *.fixed').forEach(function(node) {
+          node.style.display = 'none';
+      });
       document.querySelector('div[role=presentation]').classList.remove('flex');
       let styleElement = document.createElement("style");
       styleElement.id = "pf-styles";
       document.head.appendChild(styleElement);
+      styleElement.sheet.insertRule("article p {text-wrap: pretty !important;}", 0);
       styleElement.sheet.insertRule("article > div {padding: 0px !important;}", 0);
+      styleElement.sheet.insertRule("article > div > div {max-width: 100% !important;}", 0);
       styleElement.sheet.insertRule("* { font-size: 12px; line-height: 1.3; margin: 0px !important;}", 0);
       let e = document.getElementsByClassName('sm:p-8');
       if (e.length > 0) {
