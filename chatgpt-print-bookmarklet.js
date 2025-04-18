@@ -48,7 +48,6 @@
       let styleElement = document.createElement("style");
       styleElement.id = "pf-styles";
       document.head.appendChild(styleElement);
-      styleElement.sheet.insertRule("article p {text-wrap: pretty !important;}", 0);
       styleElement.sheet.insertRule("article > div {padding: 0px !important;}", 0);
       styleElement.sheet.insertRule("article > div > div {max-width: 100% !important;}", 0);
       styleElement.sheet.insertRule("* { font-size: 12px; line-height: 1.3; margin: 0px !important;}", 0);
