@@ -9,6 +9,10 @@
           node.classList.remove('overflow-auto-off');
           node.classList.add('overflow-auto');
       });
+      document.querySelectorAll('html *.tableContainer-off').forEach(function(node) {
+          node.classList.remove('tableContainer-off');
+          node.classList.add('tableContainer');
+      });
       document.querySelectorAll('html *.absolute-off').forEach(function(node) {
           node.classList.remove('absolute-off');
           node.classList.add('absolute');
@@ -34,6 +38,10 @@
           node.classList.remove('overflow-auto');
           node.classList.add('overflow-auto-off');
       });
+      document.querySelectorAll('html *.tableContainer').forEach(function(node) {
+          node.classList.remove('tableContainer');
+          node.classList.add('tableContainer-off');
+      });
       document.querySelectorAll('html *.absolute').forEach(function(node) {
           node.classList.remove('absolute');
           node.classList.add('absolute-off');
@@ -50,6 +58,7 @@
       document.head.appendChild(styleElement);
       styleElement.sheet.insertRule("article > div {padding: 0px !important;}", 0);
       styleElement.sheet.insertRule("article > div > div {max-width: 100% !important;}", 0);
+      styleElement.sheet.insertRule(".markdown td, .markdown th { padding: 2px !important;}", 0);
       styleElement.sheet.insertRule("* { font-size: 12px; line-height: 1.3; margin: 0px !important;}", 0);
       let e = document.getElementsByClassName('sm:p-8');
       if (e.length > 0) {
