@@ -78,10 +78,13 @@
       styleElement.sheet.insertRule(".markdown .justify-center { justify-content: start !important;}", 0);
       styleElement.sheet.insertRule(".border { border: 0px !important;}", 0);
       styleElement.sheet.insertRule("* { font-size: 12px; line-height: 1.3; margin: 0px !important;}", 0);
-      styleElement.sheet.insertRule("h1 { font-size: 16px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
-      styleElement.sheet.insertRule("h2 { font-size: 14px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
-      styleElement.sheet.insertRule("h3 { font-size: 12px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
-      styleElement.sheet.insertRule("td { min-width: auto !important; min-height: auto !important;}", 0);
+      styleElement.sheet.insertRule("h1 { font-size: 18px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
+      styleElement.sheet.insertRule("h2 { font-size: 16px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
+      styleElement.sheet.insertRule("h3 { font-size: 14px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
+      styleElement.sheet.insertRule("h4 { font-size: 12px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
+      styleElement.sheet.insertRule("td, th { min-width: auto !important; min-height: auto !important;}", 0);
+      styleElement.sheet.insertRule("div, p, ul, ul, table, tr, td, th, h1, h2, h3, h4 { break-inside: avoid !important; break-before: avoid !important; break-after:  avoid !important;}", 0);
+      styleElement.sheet.insertRule(".markdown p, .markdown ul, .markdown ol, .markdown table, .markdown h1, .markdown h2, .markdown h3, .markdown h4 { display: block !important;}", 0);
       let e = document.getElementsByClassName('sm:p-8');
       if (e.length > 0) {
           e[0].setAttribute("style", "border: none !important; padding: 0px !important; box-shadow: none !important;");
