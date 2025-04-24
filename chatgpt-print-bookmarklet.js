@@ -17,6 +17,10 @@
           node.classList.remove('horzScrollShadows-off');
           node.classList.add('horzScrollShadows');
       });
+      document.querySelectorAll('html *.shadow-md-off').forEach(function(node) {
+        node.classList.remove('shadow-md-off');
+        node.classList.add('shadow-md');
+      });
       document.querySelectorAll('html *.absolute-off').forEach(function(node) {
           node.classList.remove('absolute-off');
           node.classList.add('absolute');
@@ -50,6 +54,10 @@
           node.classList.remove('horzScrollShadows');
           node.classList.add('horzScrollShadows-off');
       });
+      document.querySelectorAll('html *.shadow-md').forEach(function(node) {
+        node.classList.remove('shadow-md');
+        node.classList.add('shadow-md-off');
+      });
       document.querySelectorAll('html *.absolute').forEach(function(node) {
           node.classList.remove('absolute');
           node.classList.add('absolute-off');
@@ -68,7 +76,12 @@
       styleElement.sheet.insertRule("article > div > div {max-width: 100% !important;}", 0);
       styleElement.sheet.insertRule(".markdown td, .markdown th { padding: 2px !important;}", 0);
       styleElement.sheet.insertRule(".markdown .justify-center { justify-content: start !important;}", 0);
+      styleElement.sheet.insertRule(".border { border: 0px !important;}", 0);
       styleElement.sheet.insertRule("* { font-size: 12px; line-height: 1.3; margin: 0px !important;}", 0);
+      styleElement.sheet.insertRule("h1 { font-size: 16px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
+      styleElement.sheet.insertRule("h2 { font-size: 14px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
+      styleElement.sheet.insertRule("h3 { font-size: 12px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
+      styleElement.sheet.insertRule("td { min-width: auto !important; min-height: auto !important;}", 0);
       let e = document.getElementsByClassName('sm:p-8');
       if (e.length > 0) {
           e[0].setAttribute("style", "border: none !important; padding: 0px !important; box-shadow: none !important;");
