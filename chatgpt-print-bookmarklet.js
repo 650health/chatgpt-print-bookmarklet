@@ -29,10 +29,10 @@
           node.style.display = 'flex';
       });
       document.querySelectorAll('html *.fixed').forEach(function(node) {
-          node.style.display = null;
+          node.style.display = '';
       });
       document.querySelectorAll('div[class^=mx-], div.py-2').forEach(function(node) {
-          node.style.display = null;
+          node.style.display = '';
       });
       document.getElementById("pf-styles").remove();
       let e = document.getElementsByClassName('sm:p-8');
@@ -89,7 +89,7 @@
       styleElement.sheet.insertRule("h3 { font-size: 14px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
       styleElement.sheet.insertRule("h4 { font-size: 12px !important; margin-top: 5px !important; margin-bottom: 3px !important;}", 0);
       styleElement.sheet.insertRule("td, th { min-width: auto !important; min-height: auto !important;}", 0);
-      styleElement.sheet.insertRule("div, p, ul, ul, table, tr, td, th, h1, h2, h3, h4 { break-inside: avoid !important; break-before: avoid !important; break-after:  avoid !important;}", 0);
+      styleElement.sheet.insertRule("div, p, ul, table, tr, td, th, h1, h2, h3, h4 { break-inside: avoid !important; break-before: avoid !important; break-after: avoid !important;}", 0);
       styleElement.sheet.insertRule(".markdown p, .markdown ul, .markdown ol, .markdown table, .markdown h1, .markdown h2, .markdown h3, .markdown h4 { display: block !important;}", 0);
       let e = document.getElementsByClassName('sm:p-8');
       if (e.length > 0) {
