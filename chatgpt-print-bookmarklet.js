@@ -31,6 +31,9 @@
       document.querySelectorAll('html *.fixed').forEach(function(node) {
           node.style.display = null;
       });
+      document.querySelectorAll('div[class^=mx-], div.py-2').forEach(function(node) {
+          node.style.display = null;
+      });
       document.getElementById("pf-styles").remove();
       let e = document.getElementsByClassName('sm:p-8');
       if (e.length > 0) {
@@ -66,6 +69,9 @@
           node.style.display = 'none';
       });
       document.querySelectorAll('html *.fixed').forEach(function(node) {
+          node.style.display = 'none';
+      });
+      document.querySelectorAll('div[class^=mx-], div.py-2').forEach(function(node) {
           node.style.display = 'none';
       });
       document.querySelector('div[role=presentation]').classList.remove('flex');
