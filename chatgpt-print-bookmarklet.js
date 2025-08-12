@@ -34,6 +34,9 @@
       document.querySelectorAll('div[class^=mx-], div.py-2').forEach(function(node) {
           node.style.display = '';
       });
+      document.querySelectorAll('button[data-testid=good-response-turn-action-button]').forEach(function(node) {
+          node.parentElement.style.display = '';
+      });
       document.getElementById("pf-styles").remove();
       let e = document.getElementsByClassName('sm:p-8');
       if (e.length > 0) {
@@ -73,6 +76,9 @@
       });
       document.querySelectorAll('div[class^=mx-], div.py-2').forEach(function(node) {
           node.style.display = 'none';
+      });
+      document.querySelectorAll('button[data-testid=good-response-turn-action-button]').forEach(function(node) {
+          node.parentElement.style.display = 'none';
       });
       document.querySelector('div[role=presentation]').classList.remove('flex');
       let styleElement = document.createElement("style");
