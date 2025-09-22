@@ -9,9 +9,10 @@
           node.classList.remove('overflow-auto-off');
           node.classList.add('overflow-auto');
       });
-      document.querySelectorAll('html *.tableContainer-off').forEach(function(node) {
-          node.classList.remove('tableContainer-off');
-          node.classList.add('tableContainer');
+      document.querySelectorAll('[class*=_tableContainer]').forEach(el => {
+        el.className = [...el.classList].map(c => (
+          c.includes('_tableContainer') && c.endsWith('-off') ? c.slice(0, -4) : c
+        )).join(' ');
       });
       document.querySelectorAll('html *.horzScrollShadows-off').forEach(function(node) {
           node.classList.remove('horzScrollShadows-off');
@@ -56,9 +57,11 @@
           node.classList.remove('overflow-auto');
           node.classList.add('overflow-auto-off');
       });
-      document.querySelectorAll('html *.tableContainer').forEach(function(node) {
-          node.classList.remove('tableContainer');
-          node.classList.add('tableContainer-off');
+      // All styles containing _tableContainer. e.g _tableContainer_1rjym_1
+      document.querySelectorAll('[class*=_tableContainer]').forEach(el => {
+        el.className = [...el.classList].map(c =>
+          c.includes('_tableContainer') ? `${c}-off` : c
+        ).join(' ');
       });
       document.querySelectorAll('html *.horzScrollShadows').forEach(function(node) {
           node.classList.remove('horzScrollShadows');
