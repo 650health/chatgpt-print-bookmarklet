@@ -17,6 +17,10 @@
           node.classList.remove('horzScrollShadows-off');
           node.classList.add('horzScrollShadows');
       });
+      document.querySelectorAll('html *.h-full-off').forEach(function(node) {
+          node.classList.remove('h-full-off');
+          node.classList.add('h-full');
+      });
       document.querySelectorAll('html *.shadow-md-off').forEach(function(node) {
         node.classList.remove('shadow-md-off');
         node.classList.add('shadow-md');
@@ -63,6 +67,10 @@
       document.querySelectorAll('html *.shadow-md').forEach(function(node) {
         node.classList.remove('shadow-md');
         node.classList.add('shadow-md-off');
+      });
+      document.querySelectorAll('html *.h-full').forEach(function(node) {
+          node.classList.remove('h-full');
+          node.classList.add('h-full-off');
       });
       document.querySelectorAll('html *.absolute').forEach(function(node) {
           node.classList.remove('absolute');
