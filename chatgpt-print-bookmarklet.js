@@ -47,6 +47,8 @@
       if (e.length > 0) {
           e[0].removeAttribute("style");
       }
+      let vf = document.querySelector("body > div");
+      vf.className = window.vfClassName;
       window.PF = null;
     } else {
       document.querySelectorAll('html *.overflow-hidden').forEach(function(node) {
@@ -112,6 +114,9 @@
       if (e.length > 0) {
           e[0].setAttribute("style", "border: none !important; padding: 0px !important; box-shadow: none !important;");
       }
+      let vf = document.querySelector("body > div");
+      window.vfClassName = vf.className;
+      vf.className = "";
       window.PF = true;
     }
 })();
