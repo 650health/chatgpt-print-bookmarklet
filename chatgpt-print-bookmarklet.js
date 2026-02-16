@@ -47,6 +47,14 @@
       if (e.length > 0) {
           e[0].removeAttribute("style");
       }
+      document.querySelectorAll('span[data-state="closed"] button').forEach(b => {
+        if (b.dataset.origClass!=null) {
+          b.setAttribute("class", b.dataset.origClass);
+          delete b.dataset.origClass;
+        }
+        b.style.textDecoration = "";
+        b.querySelectorAll("svg").forEach(s => { s.style.display=""; });
+      });
       let vf = document.querySelector("body > div");
       vf.className = window.vfClassName;
       window.PF = null;
@@ -114,6 +122,12 @@
       if (e.length > 0) {
           e[0].setAttribute("style", "border: none !important; padding: 0px !important; box-shadow: none !important;");
       }
+      document.querySelectorAll('span[data-state="closed"] button').forEach(b => {
+        b.dataset.origClass = b.getAttribute("class");
+        b.className = "flex";
+        b.style.textDecoration = "underline";
+        b.querySelectorAll("svg").forEach(s => { s.style.display = "none"; });
+      });
       let vf = document.querySelector("body > div");
       window.vfClassName = vf.className;
       vf.className = "";
