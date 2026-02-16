@@ -59,6 +59,9 @@
         el.classList.replace('is-wrapped', 'whitespace-pre!');
         el.style.whiteSpace = '';
       });
+      document.querySelectorAll('header').forEach(el => {
+        el.style.display = '';
+      });
       let vf = document.querySelector("body > div");
       vf.className = window.vfClassName;
       window.PF = null;
@@ -135,6 +138,9 @@
       document.querySelectorAll('code.whitespace-pre\\!').forEach(el => {
         el.classList.replace('whitespace-pre!', 'is-wrapped');
         el.style.whiteSpace = 'pre-wrap';
+      });
+      document.querySelectorAll('header').forEach(el => {
+        el.style.display = 'none';
       });
       let vf = document.querySelector("body > div");
       window.vfClassName = vf.className;
