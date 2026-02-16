@@ -55,6 +55,10 @@
         b.style.textDecoration = "";
         b.querySelectorAll("svg").forEach(s => { s.style.display=""; });
       });
+      document.querySelectorAll('code.is-wrapped').forEach(el => {
+        el.classList.replace('is-wrapped', 'whitespace-pre!');
+        el.style.whiteSpace = '';
+      });
       let vf = document.querySelector("body > div");
       vf.className = window.vfClassName;
       window.PF = null;
@@ -127,6 +131,10 @@
         b.className = "flex";
         b.style.textDecoration = "underline";
         b.querySelectorAll("svg").forEach(s => { s.style.display = "none"; });
+      });
+      document.querySelectorAll('code.whitespace-pre\\!').forEach(el => {
+        el.classList.replace('whitespace-pre!', 'is-wrapped');
+        el.style.whiteSpace = 'pre-wrap';
       });
       let vf = document.querySelector("body > div");
       window.vfClassName = vf.className;
