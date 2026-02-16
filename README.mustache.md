@@ -4,7 +4,7 @@
 
 Create a new bookmark with the following URL:
 ```
-{{ bookmarklet }}
+{{{ bookmarklet }}}
 ```
 
 ## Development Setup
