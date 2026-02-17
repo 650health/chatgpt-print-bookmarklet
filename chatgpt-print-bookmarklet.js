@@ -52,8 +52,11 @@
           b.setAttribute("class", b.dataset.origClass);
           delete b.dataset.origClass;
         }
-        b.style.textDecoration = "";
-        b.querySelectorAll("svg").forEach(s => { s.style.display=""; });
+        b.style.color = "";
+        b.querySelectorAll("svg").forEach(s => {
+          s.style.width = "";
+          s.style.height = "";
+        });
       });
       document.querySelectorAll('code.is-wrapped').forEach(el => {
         el.classList.replace('is-wrapped', 'whitespace-pre!');
@@ -132,8 +135,11 @@
       document.querySelectorAll('span[data-state="closed"] button').forEach(b => {
         b.dataset.origClass = b.getAttribute("class");
         b.className = "flex";
-        b.style.textDecoration = "underline";
-        b.querySelectorAll("svg").forEach(s => { s.style.display = "none"; });
+        b.style.color = "#555555";
+        b.querySelectorAll("svg").forEach(s => {
+          s.style.width = "11px";
+          s.style.height = "11px";
+        });
       });
       document.querySelectorAll('code.whitespace-pre\\!').forEach(el => {
         el.classList.replace('whitespace-pre!', 'is-wrapped');
