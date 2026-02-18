@@ -53,10 +53,7 @@
           delete b.dataset.origClass;
         }
         b.style.color = "";
-        b.querySelectorAll("svg").forEach(s => {
-          s.style.width = "";
-          s.style.height = "";
-        });
+        b.querySelectorAll("svg").forEach(s => { s.style.display=""; });
       });
       document.querySelectorAll('code.is-wrapped').forEach(el => {
         el.classList.replace('is-wrapped', 'whitespace-pre!');
@@ -136,10 +133,7 @@
         b.dataset.origClass = b.getAttribute("class");
         b.className = "flex";
         b.style.color = "#555555";
-        b.querySelectorAll("svg").forEach(s => {
-          s.style.width = "11px";
-          s.style.height = "11px";
-        });
+        b.querySelectorAll("svg").forEach(s => { s.style.display = "none"; });
       });
       document.querySelectorAll('code.whitespace-pre\\!').forEach(el => {
         el.classList.replace('whitespace-pre!', 'is-wrapped');
