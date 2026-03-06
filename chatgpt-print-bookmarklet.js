@@ -1,14 +1,8 @@
 (function () {
     if (window.PF) {
+      let style = document.getElementById('__print_fix__');
+      style.remove();
       document.querySelector('div[role=presentation]').classList.add('flex');
-      document.querySelectorAll('html *.overflow-hidden-off').forEach(function(node) {
-          node.classList.remove('overflow-hidden-off');
-          node.classList.add('overflow-hidden');
-      });
-      document.querySelectorAll('html *.overflow-auto-off').forEach(function(node) {
-          node.classList.remove('overflow-auto-off');
-          node.classList.add('overflow-auto');
-      });
       document.querySelectorAll('[class*=_tableContainer]').forEach(el => {
         el.className = [...el.classList].map(c => (
           c.includes('_tableContainer') && c.endsWith('-off') ? c.slice(0, -4) : c
@@ -66,14 +60,24 @@
       vf.className = window.vfClassName;
       window.PF = null;
     } else {
-      document.querySelectorAll('html *.overflow-hidden').forEach(function(node) {
-          node.classList.remove('overflow-hidden');
-          node.classList.add('overflow-hidden-off');
-      });
-      document.querySelectorAll('html *.overflow-auto').forEach(function(node) {
-          node.classList.remove('overflow-auto');
-          node.classList.add('overflow-auto-off');
-      });
+      let css = `
+          html, body, body * {
+            height: auto !important;
+            max-height: none !important;
+            min-height: 0 !important;
+            max-width: 100% !important;
+            overflow: visible !important;
+          }
+          div.user-message-bubble-color {
+            width: 70% !important;
+          }
+      `;
+
+      style = document.createElement('style');
+      style.id = '__print_fix__';
+      style.textContent = css;
+      document.head.appendChild(style);
+
       // All styles containing _tableContainer. e.g _tableContainer_1rjym_1
       document.querySelectorAll('[class*=_tableContainer]').forEach(el => {
         el.className = [...el.classList].map(c =>
