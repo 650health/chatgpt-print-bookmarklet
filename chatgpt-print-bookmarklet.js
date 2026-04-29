@@ -67,6 +67,7 @@
             min-height: 0 !important;
             max-width: 100% !important;
             overflow: visible !important;
+            content-visibility: visible !important;
           }
           div.user-message-bubble-color {
             width: 70% !important;
