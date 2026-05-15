@@ -1,6 +1,17 @@
-(function () {
+(async function () {
     let style = document.getElementById('__print_fix__');
     if (!style) {
+      // Safari hack: scroll twice (here and after DOM remounting)
+      // so ChatGPT show virtualized elements before DOM extraction.
+      window.scrollTo(0, 0);
+      let scrollRoot = document.querySelector('[class*="scroll-root"]');
+      scrollRoot.scrollTop = 0;
+      scrollRoot.dispatchEvent(new Event('scroll', { bubbles: true }));
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      let conversationRoot = document.querySelector('[class*="HighlightRoot"]');
+      document.body.replaceChildren(conversationRoot);
+
       let css = `
           html, body, body * {
             height: auto !important;
@@ -36,7 +47,7 @@
           h1 {
             font-size: 18px !important;
             margin-top: 5px !important;
-            margin-bottom: 3px !important;
+            margin-bottom: 5px !important;
           }
           h2 {
             font-size: 16px !important;
@@ -72,10 +83,6 @@
       style.textContent = css;
       document.head.appendChild(style);
 
-      let h1 = document.createElement('h1');
-      h1.textContent = document.title;
-      document.querySelector("main").prepend(h1);
-
       // All styles containing _tableContainer. e.g _tableContainer_1rjym_1
       document.querySelectorAll('[class*=_tableContainer]').forEach(el => {
         el.className = [...el.classList].filter(c =>
@@ -106,7 +113,6 @@
       document.querySelectorAll('button[data-testid=good-response-turn-action-button]').forEach(function(node) {
           node.parentElement.style.display = 'none';
       });
-      document.querySelector('div[role=presentation]').classList.remove('flex');
       let e = document.getElementsByClassName('sm:p-8');
       if (e.length > 0) {
           e[0].setAttribute("style", "border: none !important; padding: 0px !important; box-shadow: none !important;");
@@ -123,6 +129,14 @@
       document.querySelectorAll('header').forEach(el => {
         el.style.display = 'none';
       });
-      document.querySelector("body > div").className = "";
+
+      let h1 = document.createElement('h1');
+      h1.textContent = document.title;
+      conversationRoot.prepend(h1);
+
+      window.scrollTo(0, 0);
+      // Safari quirks
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     }
 })();
