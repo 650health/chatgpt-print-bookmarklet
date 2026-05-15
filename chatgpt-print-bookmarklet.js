@@ -1,65 +1,6 @@
 (function () {
-    if (window.PF) {
-      let style = document.getElementById('__print_fix__');
-      style.remove();
-      document.querySelector('div[role=presentation]').classList.add('flex');
-      document.querySelectorAll('[class*=_tableContainer]').forEach(el => {
-        el.className = [...el.classList].map(c => (
-          c.includes('_tableContainer') && c.endsWith('-off') ? c.slice(0, -4) : c
-        )).join(' ');
-      });
-      document.querySelectorAll('html *.horzScrollShadows-off').forEach(function(node) {
-          node.classList.remove('horzScrollShadows-off');
-          node.classList.add('horzScrollShadows');
-      });
-      document.querySelectorAll('html *.h-full-off').forEach(function(node) {
-          node.classList.remove('h-full-off');
-          node.classList.add('h-full');
-      });
-      document.querySelectorAll('html *.shadow-md-off').forEach(function(node) {
-        node.classList.remove('shadow-md-off');
-        node.classList.add('shadow-md');
-      });
-      document.querySelectorAll('html *.absolute-off').forEach(function(node) {
-          node.classList.remove('absolute-off');
-          node.classList.add('absolute');
-      });
-      document.querySelectorAll('html *.isolate').forEach(function(node) {
-          node.style.display = 'flex';
-      });
-      document.querySelectorAll('html *.fixed').forEach(function(node) {
-          node.style.display = '';
-      });
-      document.querySelectorAll('div[class^=mx-], div.py-2').forEach(function(node) {
-          node.style.display = '';
-      });
-      document.querySelectorAll('button[data-testid=good-response-turn-action-button]').forEach(function(node) {
-          node.parentElement.style.display = '';
-      });
-      document.getElementById("pf-styles").remove();
-      let e = document.getElementsByClassName('sm:p-8');
-      if (e.length > 0) {
-          e[0].removeAttribute("style");
-      }
-      document.querySelectorAll('span[data-state="closed"] button').forEach(b => {
-        if (b.dataset.origClass!=null) {
-          b.setAttribute("class", b.dataset.origClass);
-          delete b.dataset.origClass;
-        }
-        b.style.color = "";
-        b.querySelectorAll("svg").forEach(s => { s.style.display=""; });
-      });
-      document.querySelectorAll('code.is-wrapped').forEach(el => {
-        el.classList.replace('is-wrapped', 'whitespace-pre!');
-        el.style.whiteSpace = '';
-      });
-      document.querySelectorAll('header').forEach(el => {
-        el.style.display = '';
-      });
-      let vf = document.querySelector("body > div");
-      vf.className = window.vfClassName;
-      window.PF = null;
-    } else {
+    let style = document.getElementById('__print_fix__');
+    if (!style) {
       let css = `
           html, body, body * {
             height: auto !important;
@@ -81,25 +22,21 @@
 
       // All styles containing _tableContainer. e.g _tableContainer_1rjym_1
       document.querySelectorAll('[class*=_tableContainer]').forEach(el => {
-        el.className = [...el.classList].map(c =>
-          c.includes('_tableContainer') ? `${c}-off` : c
+        el.className = [...el.classList].filter(c =>
+          !c.includes('_tableContainer')
         ).join(' ');
       });
       document.querySelectorAll('html *.horzScrollShadows').forEach(function(node) {
           node.classList.remove('horzScrollShadows');
-          node.classList.add('horzScrollShadows-off');
       });
       document.querySelectorAll('html *.shadow-md').forEach(function(node) {
         node.classList.remove('shadow-md');
-        node.classList.add('shadow-md-off');
       });
       document.querySelectorAll('html *.h-full').forEach(function(node) {
           node.classList.remove('h-full');
-          node.classList.add('h-full-off');
       });
       document.querySelectorAll('html *.absolute').forEach(function(node) {
           node.classList.remove('absolute');
-          node.classList.add('absolute-off');
       });
       document.querySelectorAll('html *.isolate').forEach(function(node) {
           node.style.display = 'none';
@@ -135,7 +72,6 @@
           e[0].setAttribute("style", "border: none !important; padding: 0px !important; box-shadow: none !important;");
       }
       document.querySelectorAll('span[data-state="closed"] button').forEach(b => {
-        b.dataset.origClass = b.getAttribute("class");
         b.className = "flex";
         b.style.color = "#555555";
         b.querySelectorAll("svg").forEach(s => { s.style.display = "none"; });
@@ -147,9 +83,6 @@
       document.querySelectorAll('header').forEach(el => {
         el.style.display = 'none';
       });
-      let vf = document.querySelector("body > div");
-      window.vfClassName = vf.className;
-      vf.className = "";
-      window.PF = true;
+      document.querySelector("body > div").className = "";
     }
 })();
