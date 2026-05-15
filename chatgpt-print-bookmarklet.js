@@ -72,6 +72,10 @@
       style.textContent = css;
       document.head.appendChild(style);
 
+      let h1 = document.createElement('h1');
+      h1.textContent = document.title;
+      document.querySelector("main").prepend(h1);
+
       // All styles containing _tableContainer. e.g _tableContainer_1rjym_1
       document.querySelectorAll('[class*=_tableContainer]').forEach(el => {
         el.className = [...el.classList].filter(c =>
