@@ -20,6 +20,8 @@
             max-width: 100% !important;
             overflow: visible !important;
             content-visibility: visible !important;
+            -webkit-mask-image: none !important;
+            -webkit-mask: none !important;
           }
           div.user-message-bubble-color {
             width: 70% !important;
@@ -76,6 +78,9 @@
           .markdown p, .markdown ul, .markdown ol, .markdown table, .markdown h1, .markdown h2, .markdown h3, .markdown h4 {
             display: block !important;
           }
+          [aria-label="Response actions"] {
+            display: none !important;
+          }
       `;
 
       style = document.createElement('style');
@@ -109,9 +114,6 @@
       });
       document.querySelectorAll('div[class^=mx-], div.py-2').forEach(function(node) {
           node.style.display = 'none';
-      });
-      document.querySelectorAll('button[data-testid=good-response-turn-action-button]').forEach(function(node) {
-          node.parentElement.style.display = 'none';
       });
       let e = document.getElementsByClassName('sm:p-8');
       if (e.length > 0) {
