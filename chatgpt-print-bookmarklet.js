@@ -13,6 +13,12 @@
       document.body.replaceChildren(conversationRoot);
 
       let css = `
+          html, body {
+            background: #fff !important;
+          }
+          body * {
+            background: transparent !important;
+          }
           html, body, body * {
             height: auto !important;
             max-height: none !important;
