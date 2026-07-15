@@ -84,7 +84,7 @@
           .markdown p, .markdown ul, .markdown ol, .markdown table, .markdown h1, .markdown h2, .markdown h3, .markdown h4 {
             display: block !important;
           }
-          [aria-label="Response actions"] {
+          [aria-label="Response actions"],[aria-label="Copy"],[aria-label="Your message actions"] {
             display: none !important;
           }
       `;
