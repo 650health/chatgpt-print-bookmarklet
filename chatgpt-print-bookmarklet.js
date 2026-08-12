@@ -76,6 +76,12 @@
             min-width: auto !important;
             min-height: auto !important;
           }
+          pre, pre code, .cm-content {
+            white-space: pre-wrap !important;
+            overflow-wrap: anywhere !important;
+            word-break: break-word !important;
+            min-width: 0 !important;
+          }
           div, p, ul, table, tr, td, th, h1, h2, h3, h4 {
             break-inside: avoid !important;
             break-before: avoid !important;
