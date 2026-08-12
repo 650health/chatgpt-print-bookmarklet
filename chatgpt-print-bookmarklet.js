@@ -82,10 +82,13 @@
             word-break: break-word !important;
             min-width: 0 !important;
           }
-          div, p, ul, table, tr, td, th, h1, h2, h3, h4 {
+          tr, img, svg {
             break-inside: avoid !important;
-            break-before: avoid !important;
+            page-break-inside: avoid !important;
+          }
+          h1, h2, h3, h4 {
             break-after: avoid !important;
+            page-break-after: avoid !important;
           }
           .markdown p, .markdown ul, .markdown ol, .markdown table, .markdown h1, .markdown h2, .markdown h3, .markdown h4 {
             display: block !important;
