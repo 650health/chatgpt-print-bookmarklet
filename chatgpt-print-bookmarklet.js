@@ -71,6 +71,27 @@
           .border {
             border: 0px !important;
           }
+          .shadow-md {
+            box-shadow: none !important;
+          }
+          .absolute {
+            position: static !important;
+          }
+          .isolate, .fixed, header, div[class^="mx-"], div.py-2 {
+            display: none !important;
+          }
+          .sm\\:p-8 {
+            border: none !important;
+            padding: 0px !important;
+            box-shadow: none !important;
+          }
+          span[data-state="closed"] button {
+            color: #555555 !important;
+            display: flex !important;
+          }
+          span[data-state="closed"] button svg {
+            display: none !important;
+          }
           * {
             font-size: 12px;
             line-height: 1.3;
@@ -117,7 +138,7 @@
           .markdown p, .markdown ul, .markdown ol, .markdown table, .markdown h1, .markdown h2, .markdown h3, .markdown h4 {
             display: block !important;
           }
-          [aria-label="Response actions"],[aria-label="Copy"],[aria-label="Your message actions"] {
+          [aria-label="Response actions"], [aria-label="Copy"], [aria-label="Your message actions"], [data-testid="cot-v5-tool-icon-pile"] {
             display: none !important;
           }
       `;
@@ -136,39 +157,9 @@
       document.querySelectorAll('html *.horzScrollShadows').forEach(function(node) {
           node.classList.remove('horzScrollShadows');
       });
-      document.querySelectorAll('html *.shadow-md').forEach(function(node) {
-        node.classList.remove('shadow-md');
-      });
-      document.querySelectorAll('html *.h-full').forEach(function(node) {
-          node.classList.remove('h-full');
-      });
-      document.querySelectorAll('html *.absolute').forEach(function(node) {
-          node.classList.remove('absolute');
-      });
-      document.querySelectorAll('html *.isolate').forEach(function(node) {
-          node.style.display = 'none';
-      });
-      document.querySelectorAll('html *.fixed').forEach(function(node) {
-          node.style.display = 'none';
-      });
-      document.querySelectorAll('div[class^=mx-], div.py-2').forEach(function(node) {
-          node.style.display = 'none';
-      });
-      let e = document.getElementsByClassName('sm:p-8');
-      if (e.length > 0) {
-          e[0].setAttribute("style", "border: none !important; padding: 0px !important; box-shadow: none !important;");
-      }
-      document.querySelectorAll('span[data-state="closed"] button').forEach(b => {
-        b.className = "flex";
-        b.style.color = "#555555";
-        b.querySelectorAll("svg").forEach(s => { s.style.display = "none"; });
-      });
       document.querySelectorAll('code.whitespace-pre\\!').forEach(el => {
         el.classList.replace('whitespace-pre!', 'is-wrapped');
         el.style.whiteSpace = 'pre-wrap';
-      });
-      document.querySelectorAll('header').forEach(el => {
-        el.style.display = 'none';
       });
 
       let h1 = document.createElement('h1');
