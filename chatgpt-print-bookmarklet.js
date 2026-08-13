@@ -65,6 +65,9 @@
           .markdown td, .markdown th {
             padding: 2px !important;
           }
+          .markdown [class*="_tableWrapper"] {
+            display: block !important;
+          }
           .markdown .justify-center {
             justify-content: start !important;
           }
