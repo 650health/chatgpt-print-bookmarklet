@@ -1,15 +1,39 @@
 (async function () {
     let style = document.getElementById('__print_fix__');
     if (!style) {
-      // Safari hack: scroll twice (here and after DOM remounting)
-      // so ChatGPT show virtualized elements before DOM extraction.
-      window.scrollTo(0, 0);
-      let scrollRoot = document.querySelector('[class*="scroll-root"]');
-      scrollRoot.scrollTop = 0;
-      scrollRoot.dispatchEvent(new Event('scroll', { bubbles: true }));
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // ChatGPT virtualizes long conversations. Scroll through the conversation
+      // and clone each mounted turn before removing the application shell.
+      let conversationRoot = document.createElement('main');
+      let collected = new Map();
+      let scrollRoot = [...document.querySelectorAll('[class*="scroll-root"]')]
+        .find(node => node.scrollHeight > node.clientHeight);
 
-      let conversationRoot = document.querySelector('[class*="HighlightRoot"]');
+      scrollRoot.scrollTop = 0;
+      for (let previous = -1; previous !== scrollRoot.scrollTop;) {
+        previous = scrollRoot.scrollTop;
+        await new Promise(resolve => setTimeout(resolve, 250));
+
+        let mounted = [
+          ...document.querySelectorAll('[data-testid^="conversation-turn-"]')
+        ];
+        mounted.forEach((turn, index) => {
+          let id = turn.dataset.turnId;
+          if (collected.has(id)) return;
+
+          let next = mounted
+            .slice(index + 1)
+            .find(candidate => collected.has(candidate.dataset.turnId));
+          let clone = turn.cloneNode(true);
+          conversationRoot.insertBefore(
+            clone,
+            next ? collected.get(next.dataset.turnId) : null
+          );
+          collected.set(id, clone);
+        });
+
+        scrollRoot.scrollTop += scrollRoot.clientHeight / 2;
+      }
+
       document.body.replaceChildren(conversationRoot);
 
       let css = `
