@@ -2,8 +2,9 @@
     let style = document.getElementById('__print_fix__');
     if (!style) {
       // ChatGPT virtualizes long conversations. Scroll through the conversation
-      // and clone each mounted turn before removing the application shell.
+      // and clone each mounted turn into a separate printable snapshot.
       let conversationRoot = document.createElement('main');
+      conversationRoot.id = '__print_snapshot__';
       let collected = new Map();
       let scrollRoot = [...document.querySelectorAll('[class*="scroll-root"]')]
         .find(node => node.scrollHeight > node.clientHeight);
@@ -33,8 +34,6 @@
 
         scrollRoot.scrollTop += scrollRoot.clientHeight / 2;
       }
-
-      document.body.replaceChildren(conversationRoot);
 
       let css = `
           html, body {
@@ -149,29 +148,70 @@
       style = document.createElement('style');
       style.id = '__print_fix__';
       style.textContent = css;
-      document.head.appendChild(style);
 
       // All styles containing _tableContainer. e.g _tableContainer_1rjym_1
-      document.querySelectorAll('[class*=_tableContainer]').forEach(el => {
+      conversationRoot.querySelectorAll('[class*=_tableContainer]').forEach(el => {
         el.className = [...el.classList].filter(c =>
           !c.includes('_tableContainer')
         ).join(' ');
       });
-      document.querySelectorAll('html *.horzScrollShadows').forEach(function(node) {
+      conversationRoot.querySelectorAll('.horzScrollShadows').forEach(function(node) {
           node.classList.remove('horzScrollShadows');
       });
-      document.querySelectorAll('code.whitespace-pre\\!').forEach(el => {
+      conversationRoot.querySelectorAll('code.whitespace-pre\\!').forEach(el => {
         el.classList.replace('whitespace-pre!', 'is-wrapped');
         el.style.whiteSpace = 'pre-wrap';
+      });
+
+      conversationRoot.querySelectorAll(
+        'script, iframe, frame, frameset, object, embed, applet, meta[http-equiv="refresh"]'
+      ).forEach(node => node.remove());
+      let urlAttributes = /^(action|formaction|href|src|xlink:href)$/i;
+      conversationRoot.querySelectorAll('*').forEach(node => {
+        [...node.attributes].forEach(attribute => {
+          if (
+            /^on/i.test(attribute.name) ||
+            attribute.name.toLowerCase() === 'srcdoc' ||
+            (urlAttributes.test(attribute.name) && /^\s*javascript:/i.test(attribute.value))
+          ) {
+            node.removeAttribute(attribute.name);
+          }
+        });
       });
 
       let h1 = document.createElement('h1');
       h1.textContent = document.title;
       conversationRoot.prepend(h1);
 
-      window.scrollTo(0, 0);
-      // Safari quirks
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
+      // Replace the page with a script-free document so React is destroyed
+      // without mutating its managed DOM or changing the conversation URL.
+      let printDocument = document.implementation.createHTMLDocument(document.title);
+      [
+        [document.documentElement, printDocument.documentElement],
+        [document.body, printDocument.body]
+      ].forEach(([source, target]) => {
+        [...source.attributes].forEach(attribute =>
+          target.setAttribute(attribute.name, attribute.value)
+        );
+      });
+      printDocument.documentElement.classList.remove('dark');
+      printDocument.documentElement.classList.add('light');
+      printDocument.documentElement.dataset.chatTheme = 'default';
+      printDocument.documentElement.style.colorScheme = 'light';
+      printDocument.body.classList.remove('dark');
+      printDocument.body.style.colorScheme = 'light';
+
+      document.head.querySelectorAll('meta[name="viewport"], link[rel="stylesheet"], style')
+        .forEach(node => {
+          let clone = node.cloneNode(true);
+          if (node.href) clone.href = node.href;
+          printDocument.head.appendChild(clone);
+        });
+      printDocument.head.appendChild(style);
+      printDocument.body.appendChild(conversationRoot);
+
+      document.open();
+      document.write('<!doctype html>' + printDocument.documentElement.outerHTML);
+      document.close();
     }
 })();
