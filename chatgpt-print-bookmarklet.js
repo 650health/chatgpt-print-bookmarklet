@@ -80,7 +80,7 @@
           .absolute {
             position: static !important;
           }
-          .isolate, .fixed, header, div[class^="mx-"], div.py-2 {
+          .fixed, header, div[class^="mx-"], div.py-2 {
             display: none !important;
           }
           .sm\\:p-8 {
@@ -141,7 +141,7 @@
           .markdown p, .markdown ul, .markdown ol, .markdown table, .markdown h1, .markdown h2, .markdown h3, .markdown h4 {
             display: block !important;
           }
-          [aria-label="Response actions"], [aria-label="Copy"], [aria-label="Your message actions"], [data-testid="cot-v5-tool-icon-pile"] {
+          [aria-label="Response actions"], [aria-label="Copy"], [aria-label="Your message actions"], [data-testid="writing-block-header-surface"], [data-testid="cot-v5-tool-icon-pile"] {
             display: none !important;
           }
       `;
