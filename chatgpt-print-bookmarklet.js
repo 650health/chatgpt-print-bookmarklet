@@ -37,11 +37,14 @@
       document.body.replaceChildren(conversationRoot);
 
       let css = `
-          html, body {
-            background: #fff !important;
-          }
-          body * {
-            background: transparent !important;
+          @layer __print_fix__ {
+            html, body {
+              background: #fff !important;
+            }
+            body *, body *::before, body *::after {
+              background: transparent !important;
+              box-shadow: none !important;
+            }
           }
           html, body, body * {
             height: auto !important;
@@ -74,9 +77,6 @@
           .border {
             border: 0px !important;
           }
-          .shadow-md {
-            box-shadow: none !important;
-          }
           .absolute {
             position: static !important;
           }
@@ -86,7 +86,6 @@
           .sm\\:p-8 {
             border: none !important;
             padding: 0px !important;
-            box-shadow: none !important;
           }
           span[data-state="closed"] button {
             color: #555555 !important;
@@ -149,7 +148,7 @@
       style = document.createElement('style');
       style.id = '__print_fix__';
       style.textContent = css;
-      document.head.appendChild(style);
+      document.head.prepend(style);
 
       // All styles containing _tableContainer. e.g _tableContainer_1rjym_1
       document.querySelectorAll('[class*=_tableContainer]').forEach(el => {
