@@ -44,6 +44,16 @@
             body *, body *::before, body *::after {
               background: transparent !important;
               box-shadow: none !important;
+              font-size: 10pt !important;
+            }
+            h1 {
+              font-size: 14pt !important;
+            }
+            h2 {
+              font-size: 12pt !important;
+            }
+            h3 {
+              font-size: 11pt !important;
             }
           }
           html, body, body * {
@@ -96,27 +106,22 @@
             display: none !important;
           }
           * {
-            font-size: 12px;
             line-height: 1.3;
             margin: 0px !important;
           }
           h1 {
-            font-size: 18px !important;
             margin-top: 5px !important;
             margin-bottom: 5px !important;
           }
           h2 {
-            font-size: 16px !important;
             margin-top: 5px !important;
             margin-bottom: 3px !important;
           }
           h3 {
-            font-size: 14px !important;
             margin-top: 5px !important;
             margin-bottom: 3px !important;
           }
           h4 {
-            font-size: 12px !important;
             margin-top: 5px !important;
             margin-bottom: 3px !important;
           }
