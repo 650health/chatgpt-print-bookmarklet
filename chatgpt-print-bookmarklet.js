@@ -58,6 +58,7 @@
           }
           div.user-message-bubble-color {
             width: 70% !important;
+            margin-inline-start: auto !important;
           }
           article > div {
             padding: 0px !important;
