@@ -37,24 +37,14 @@
       document.body.replaceChildren(conversationRoot);
 
       let css = `
-          @layer __print_fix__ {
-            html, body {
-              background: #fff !important;
-            }
-            body *, body *::before, body *::after {
-              background: transparent !important;
-              box-shadow: none !important;
-              font-size: 10pt !important;
-            }
-            h1 {
-              font-size: 14pt !important;
-            }
-            h2 {
-              font-size: 12pt !important;
-            }
-            h3 {
-              font-size: 11pt !important;
-            }
+        @layer __print_fix__ {
+          html, body {
+            background: #fff !important;
+          }
+          body *, body *::before, body *::after {
+            background: transparent !important;
+            box-shadow: none !important;
+            font-size: 10pt !important;
           }
           html, body, body * {
             height: auto !important;
@@ -106,22 +96,26 @@
             display: none !important;
           }
           * {
-            line-height: 1.3;
+            line-height: 1.3 !important;
             margin: 0px !important;
           }
           h1 {
+            font-size: 14pt !important;
             margin-top: 5px !important;
             margin-bottom: 5px !important;
           }
           h2 {
+            font-size: 12pt !important;
             margin-top: 5px !important;
             margin-bottom: 3px !important;
           }
           h3 {
+            font-size: 11pt !important;
             margin-top: 5px !important;
             margin-bottom: 3px !important;
           }
           h4 {
+            font-size: 10pt !important;
             margin-top: 5px !important;
             margin-bottom: 3px !important;
           }
@@ -149,6 +143,7 @@
           [aria-label="Response actions"], [aria-label="Copy"], [aria-label="Your message actions"], [data-testid="writing-block-header-surface"], [data-testid="cot-v5-tool-icon-pile"] {
             display: none !important;
           }
+        }
       `;
 
       style = document.createElement('style');
