@@ -44,7 +44,7 @@
           body *, body *::before, body *::after {
             background: transparent !important;
             box-shadow: none !important;
-            font-size: 10pt !important;
+            font-size: 9pt !important;
           }
           html, body, body * {
             height: auto !important;
@@ -100,22 +100,22 @@
             margin: 0px !important;
           }
           h1 {
-            font-size: 14pt !important;
+            font-size: 13pt !important;
             margin-top: 5px !important;
             margin-bottom: 5px !important;
           }
           h2 {
-            font-size: 12pt !important;
-            margin-top: 5px !important;
-            margin-bottom: 3px !important;
-          }
-          h3 {
             font-size: 11pt !important;
             margin-top: 5px !important;
             margin-bottom: 3px !important;
           }
-          h4 {
+          h3 {
             font-size: 10pt !important;
+            margin-top: 5px !important;
+            margin-bottom: 3px !important;
+          }
+          h4 {
+            font-size: 9pt !important;
             margin-top: 5px !important;
             margin-bottom: 3px !important;
           }
