@@ -41,6 +41,10 @@
           html, body {
             background: #fff !important;
           }
+          html {
+            -webkit-text-size-adjust: none !important;
+            text-size-adjust: none !important;
+          }
           body *, body *::before, body *::after {
             background: transparent !important;
             box-shadow: none !important;
