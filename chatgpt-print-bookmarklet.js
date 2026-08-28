@@ -61,6 +61,7 @@
             -webkit-mask: none !important;
           }
           div.user-message-bubble-color {
+            color: #000 !important;
             width: 70% !important;
             margin-inline-start: auto !important;
           }
