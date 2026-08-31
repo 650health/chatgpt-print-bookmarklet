@@ -9,6 +9,41 @@
         .find(node => node.scrollHeight > node.clientHeight);
 
       scrollRoot.scrollTop = 0;
+
+      // Keep returning to the top until the firt mounted turn stops changing.
+      let deadline = Date.now() + 20000; // wait up to 20 seconds
+      let firstTurn, unchangedAtTopFor = 0;
+      while (unchangedAtTopFor < 1000) {
+        if (Date.now() >= deadline) {
+          // Give up. Work with what we have
+          break;
+        }
+
+        // Loading older turns may move the scroll position away from the top.
+        scrollRoot.scrollTop = 0;
+        await new Promise(resolve => setTimeout(resolve, 250));
+
+        let currentFirstTurn = document.querySelector(
+          '[data-testid^="conversation-turn-"]'
+        )?.dataset.turnId;
+
+        // Extent deadline after successful load
+        if (currentFirstTurn && currentFirstTurn !== firstTurn) {
+          deadline = Date.now() + 20000;
+        }
+
+        if (currentFirstTurn &&
+            currentFirstTurn === firstTurn &&
+            scrollRoot.scrollTop === 0) {
+          unchangedAtTopFor += 250;
+        } else {
+          unchangedAtTopFor = 0;
+        }
+        firstTurn = currentFirstTurn;
+      }
+      // Start collecting from the top.
+      scrollRoot.scrollTop = 0;
+
       for (let previous = -1; previous !== scrollRoot.scrollTop;) {
         previous = scrollRoot.scrollTop;
         await new Promise(resolve => setTimeout(resolve, 250));
