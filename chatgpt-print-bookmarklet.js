@@ -95,6 +95,9 @@
             -webkit-mask-image: none !important;
             -webkit-mask: none !important;
           }
+          .truncate {
+            overflow: hidden !important;
+          }
           div.user-message-bubble-color {
             color: #000 !important;
             width: 70% !important;
