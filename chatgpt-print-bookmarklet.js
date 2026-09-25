@@ -5,10 +5,18 @@
       // and clone each mounted turn before removing the application shell.
       let conversationRoot = document.createElement('main');
       let collected = new Map();
-      let scrollRoot = [...document.querySelectorAll('[class*="scroll-root"]')]
+      let turnSelector = '[data-testid^="conversation-turn-"],[data-turn-key]';
+      let getTurnId = turn => turn?.dataset.turnId || turn?.dataset.turnKey;
+      let scrollRoot = document.querySelector('[data-app-action-timeline-scroll]') ||
+        [...document.querySelectorAll('[class*="scroll-root"]')]
         .find(node => node.scrollHeight > node.clientHeight);
 
-      scrollRoot.scrollTop = 0;
+      if (!scrollRoot) return;
+
+      // Current reversed scrollers use negative offsets; legacy ones clamp this to 0.
+      let scrollToConversationTop = () =>
+        scrollRoot.scrollTop = -scrollRoot.scrollHeight;
+      scrollToConversationTop();
 
       // Keep returning to the top until the firt mounted turn stops changing.
       let deadline = Date.now() + 20000; // wait up to 20 seconds
@@ -20,12 +28,11 @@
         }
 
         // Loading older turns may move the scroll position away from the top.
-        scrollRoot.scrollTop = 0;
+        scrollToConversationTop();
+        let top = scrollRoot.scrollTop;
         await new Promise(resolve => setTimeout(resolve, 250));
 
-        let currentFirstTurn = document.querySelector(
-          '[data-testid^="conversation-turn-"]'
-        )?.dataset.turnId;
+        let currentFirstTurn = getTurnId(scrollRoot.querySelector(turnSelector));
 
         // Extent deadline after successful load
         if (currentFirstTurn && currentFirstTurn !== firstTurn) {
@@ -34,40 +41,40 @@
 
         if (currentFirstTurn &&
             currentFirstTurn === firstTurn &&
-            scrollRoot.scrollTop === 0) {
+            scrollRoot.scrollTop === top) {
           unchangedAtTopFor += 250;
         } else {
           unchangedAtTopFor = 0;
         }
         firstTurn = currentFirstTurn;
       }
+      if (!firstTurn) return;
       // Start collecting from the top.
-      scrollRoot.scrollTop = 0;
+      scrollToConversationTop();
 
-      for (let previous = -1; previous !== scrollRoot.scrollTop;) {
+      let previous;
+      do {
         previous = scrollRoot.scrollTop;
         await new Promise(resolve => setTimeout(resolve, 250));
 
-        let mounted = [
-          ...document.querySelectorAll('[data-testid^="conversation-turn-"]')
-        ];
+        let mounted = [...scrollRoot.querySelectorAll(turnSelector)];
         mounted.forEach((turn, index) => {
-          let id = turn.dataset.turnId;
-          if (collected.has(id)) return;
+          let turnId = getTurnId(turn);
+          if (collected.has(turnId)) return;
 
           let next = mounted
             .slice(index + 1)
-            .find(candidate => collected.has(candidate.dataset.turnId));
+            .find(candidate => collected.has(getTurnId(candidate)));
           let clone = turn.cloneNode(true);
           conversationRoot.insertBefore(
             clone,
-            next ? collected.get(next.dataset.turnId) : null
+            next ? collected.get(getTurnId(next)) : null
           );
-          collected.set(id, clone);
+          collected.set(turnId, clone);
         });
 
         scrollRoot.scrollTop += scrollRoot.clientHeight / 2;
-      }
+      } while (previous !== scrollRoot.scrollTop);
 
       document.body.replaceChildren(conversationRoot);
 
