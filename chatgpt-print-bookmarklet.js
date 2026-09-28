@@ -103,7 +103,9 @@
             -webkit-mask: none !important;
           }
           .truncate {
-            overflow: hidden !important;
+            min-width: 0 !important;
+            white-space: normal !important;
+            overflow-wrap: anywhere !important;
           }
           div.user-message-bubble-color {
             color: #000 !important;
