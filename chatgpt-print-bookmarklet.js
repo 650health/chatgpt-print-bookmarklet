@@ -80,6 +80,9 @@
 
       let css = `
         @layer __print_fix__ {
+          main {
+            display: block !important;
+          }
           html, body {
             background: #fff !important;
           }
